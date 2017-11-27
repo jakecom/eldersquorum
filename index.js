@@ -47,7 +47,7 @@ app.set('view engine', 'ejs');
 // blog home page
 app.get('/', (req, res) => {
   // render `home.ejs` with the list of posts
-  res.render('views/home', { posts: posts })
+  response.render('/home', { posts: posts })
 })
 
 app.get('/cool', function(request, response) {

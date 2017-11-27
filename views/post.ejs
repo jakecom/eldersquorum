@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title><%= title %> | Elder's Quorum</title>
+    <title>Elder's Quorum</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <style>
         body {
@@ -15,7 +15,7 @@
 
 <body>
     <div class="container">
-        <%- include('../partials/navbar') %>
+        <%- include('/nav') %>
         <div>
             <h2><%= title %></h2>
             <h3><%= date %> <%= time %></h3>
@@ -24,7 +24,7 @@
             <p><%= body %></p>
             <hr>
         </div>
-        <%- include('../partials/footer') %>
+        <!--<%- include('../partials/footer') %>-->
     </div>
 </body>
 
