@@ -40,15 +40,15 @@ const posts = [
 app.set('view engine', 'ejs');
 
 
-/*app.get('/', function(request, response) {
-  response.render('pages/index')
-});*/
+app.get('/', function(request, response) {
+  response.render('pages/index', { posts: posts })
+});
 
-// blog home page
+/* blog home page
 app.get('/', (req, res) => {
   // render `home.ejs` with the list of posts
   response.render('/home', { posts: posts })
-})
+})*/
 
 app.get('/cool', function(request, response) {
   response.send(cool());
