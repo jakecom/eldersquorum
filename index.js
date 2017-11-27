@@ -31,8 +31,13 @@ app.get('/db', function (request, response) {
       done();
       if (err)
        { console.error(err); response.send("Error " + err); }
-      else
-       { response.render('pages/db', {results: result.rows} ); }
+      else{
+      	var person = result[0];
+response.status(200).json(result[0]);
+// response.render('pages/db', {results: result.rows} ); 
+      }
+
+       
     });
   });
 });
