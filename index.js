@@ -10,9 +10,43 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/', function(request, response) {
+// fake posts to simulate a database
+const posts = [
+  {
+    id: 1,
+    author: 'Bishop Jensen',
+    title: 'Ward Christmas Party',
+    date: '12/9/17',
+    time: '6:00 pm',
+    body: 'It is that time of year for the ward Christmas party. Bring your friends, family, and an entree/side/dessert for the potluck'
+  },
+  {
+    id: 2,
+    author: 'President Burton',
+    title: 'Indexing Party',
+    date: '11/9/17',
+    time: '6:30 pm',
+    body: 'We will be having an indexing night at the Nielson home. Bring your laptop. Pizza will be provided, and the Seahawks will be on.'
+  },
+  {
+    id: 3,
+    author: 'President Burton',
+    title: '5k Run',
+    date: '4/29/17',
+    time: '8:00 am',
+    body: 'Come on down to the Park for the 5k run.'
+  }
+]
+
+/*app.get('/', function(request, response) {
   response.render('pages/index')
-});
+});*/
+
+// blog home page
+app.get('/', (req, res) => {
+  // render `home.ejs` with the list of posts
+  res.render('home', { posts: posts })
+})
 
 app.get('/cool', function(request, response) {
   response.send(cool());
