@@ -45,7 +45,7 @@ const posts = [
 // blog home page
 app.get('/', (req, res) => {
   // render `home.ejs` with the list of posts
-  res.render('home', { posts: posts })
+  res.render('/home', { posts: posts })
 })
 
 app.get('/cool', function(request, response) {
