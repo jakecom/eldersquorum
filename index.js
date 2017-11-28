@@ -2,6 +2,7 @@ var cool = require('cool-ascii-faces');
 var express = require('express');
 var app = express();
 
+
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
@@ -78,11 +79,11 @@ app.get('/db', function (request, response) {
 app.get('/post/:id', (request, response) => {
   // find the post in the `posts` array
   const post = posts.filter((post) => {
-    return post.id == req.params.id
+    return post.id == request.params.id
   })[0]
 
   // render the `post.ejs` template with the post content
-  response.render('post', {
+  response.render('pages/post.ejs', {
     author: post.author,
     title: post.title,
     date: post.date,
