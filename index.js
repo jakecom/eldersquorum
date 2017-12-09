@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 
 //var parseurl = require('parseurl')
-var session = require('express-session')
+var session = require('express-session');
 
 // set up sessions
 app.use(session({
@@ -20,8 +20,6 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.set('port', (process.env.PORT || 5000));
-
-app.use(logRequest);
 
 app.use(express.static(__dirname + '/public'));
 
@@ -121,6 +119,13 @@ app.get('/post/:id', (request, response) => {
     body: post.body
   })
 })
+
+
+
+
+
+
+
 
 /*************************************************************
 * Sessions/Login
