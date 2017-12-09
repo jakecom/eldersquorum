@@ -21,8 +21,11 @@ app.use(bodyParser.urlencoded({
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/public'));
 
+
+
+// We have html and js in the public directory that need to be accessed
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(logRequest);
 
 app.post('/login', handleLogin);
@@ -30,7 +33,7 @@ app.post('/logout', handleLogout);
 
 app.get('/getServerTime', verifyLogin, getServerTime);
 
-
+app.use(express.static(__dirname + '/public'));
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 
