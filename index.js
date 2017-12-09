@@ -4,14 +4,14 @@ var express = require('express');
 var app = express();
 
 //var parseurl = require('parseurl')
-var session = require('express-session');
+var session = require('express-session')
 
 // set up sessions
 app.use(session({
   secret: 'my-super-secret-secret!',
   resave: false,
   saveUninitialized: true
-}));
+}))
 
 var bodyParser = require('body-parser')
 app.use( bodyParser.json() );
