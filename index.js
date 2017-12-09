@@ -11,7 +11,7 @@ app.use(session({
   secret: 'my-super-secret-secret!',
   resave: false,
   saveUninitialized: true
-}))
+}));
 
 var bodyParser = require('body-parser')
 app.use( bodyParser.json() );
@@ -29,10 +29,6 @@ app.post('/login', handleLogin);
 app.post('/logout', handleLogout);
 
 app.get('/getServerTime', verifyLogin, getServerTime);
-
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
 
 
 // views is directory for all template files
@@ -88,45 +84,6 @@ app.listen(app.get('port'), function() {
 });
 
 
-var pg = require('pg');
-
-app.get('/db', function (request, response) {
-  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-    client.query('SELECT id, first, last FROM person', function(err, result) {
-      done();
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else{
- response.render('pages/db', {results: result.rows} ); 
-      }  
-    });
-  });
-});
-
-// blog post
-app.get('/post/:id', (request, response) => {
-  // find the post in the `posts` array
-  const post = posts.filter((post) => {
-    return post.id == request.params.id
-  })[0]
-
-  // render the `post.ejs` template with the post content
-  response.render('pages/post.ejs', {
-    author: post.author,
-    title: post.title,
-    date: post.date,
-    time: post.time,
-    body: post.body
-  })
-})
-
-
-
-
-
-
-
-
 /*************************************************************
 * Sessions/Login
 *************************************************************/
@@ -170,3 +127,49 @@ function logRequest(request, response, next) {
 	console.log("Received a request for: " + request.url);
 	next();
 }
+
+
+
+
+/***********************************************************
+* Announcements, Homepage
+************************************************************/
+var pg = require('pg');
+
+app.get('/db', function (request, response) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    client.query('SELECT id, first, last FROM person', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else{
+ response.render('pages/db', {results: result.rows} ); 
+      }  
+    });
+  });
+});
+
+// blog post
+app.get('/post/:id', (request, response) => {
+  // find the post in the `posts` array
+  const post = posts.filter((post) => {
+    return post.id == request.params.id
+  })[0]
+
+  // render the `post.ejs` template with the post content
+  response.render('pages/post.ejs', {
+    author: post.author,
+    title: post.title,
+    date: post.date,
+    time: post.time,
+    body: post.body
+  })
+})
+
+
+
+
+
+
+
+
