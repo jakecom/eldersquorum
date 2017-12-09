@@ -33,6 +33,9 @@ app.post('/login', handleLogin);
 app.post('/logout', handleLogout);
 
 app.get('/getServerTime', verifyLogin, getServerTime);
+app.get('/log', function (req, res) {
+	res.send('pages/test.html')
+})
 
 
 
