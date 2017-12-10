@@ -38,3 +38,7 @@ function getServerTime() {
 		$("#status").text("Could not get server time.");
 	});
 }
+
+function sendReport() {
+	;
+}
