@@ -3,15 +3,15 @@ var path = require('path');
 var express = require('express');
 var app = express();
 
-//var parseurl = require('parseurl')
-var session = require('express-session')
+var parseurl = require('parseurl');
+var session = require('express-session');
 
 // set up sessions
 app.use(session({
   secret: 'my-super-secret-secret!',
   resave: false,
   saveUninitialized: true
-}))
+}));
 
 var bodyParser = require('body-parser')
 app.use( bodyParser.json() );
@@ -24,24 +24,23 @@ app.set('port', (process.env.PORT || 5000));
 
 
 
-// We have html and js in the public directory that need to be accessed
-app.use(express.static(path.join(__dirname, 'public')))
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+
+//app.use(express.static(__dirname + '/public'));
+// views is directory for all template files
 app.set('views', __dirname + '/views');
 app.use(logRequest);
 
-app.post('/login', handleLogin);
-app.post('/logout', handleLogout);
 
-app.get('/getServerTime', verifyLogin, getServerTime);
-app.get('/log', function (req, res) {
-	res.send('pages/test.html')
-})
+
+app.set('view engine', 'ejs');
 
 
 
-app.use(express.static(__dirname + '/public'));
-// views is directory for all template files
-app.set('views', __dirname + '/views');
+
 
 // fake posts to simulate a database
 const posts = [
@@ -71,8 +70,19 @@ const posts = [
   }
 ]
 
-app.set('view engine', 'ejs');
 
+//app.get('/log', function(request, response) {
+//  response.render('pages/test', { posts: posts })
+//});
+
+//app.get('/rest.js', function(request, response) {
+//  response.render('pages/rest.js', { posts: posts })
+//});
+
+app.post('/login', handleLogin);
+app.post('/logout', handleLogout);
+
+app.get('/getServerTime', verifyLogin, getServerTime);
 
 app.get('/', function(request, response) {
   response.render('pages/index', { posts: posts })
