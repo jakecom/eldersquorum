@@ -168,6 +168,19 @@ app.get('/db', function (request, response) {
   });
 });
 
+app.get('/report', function (request, response) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    client.query('SELECT id, first, last FROM person', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else{
+ response.render('pages/report', {results: result.rows} ); 
+      }  
+    });
+  });
+});
+
 // blog post
 app.get('/post/:id', (request, response) => {
   // find the post in the `posts` array
