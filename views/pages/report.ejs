@@ -15,12 +15,16 @@
 <div>
 <ul>
     <% results.forEach(function(r) { %>
-        <li><%= r.id %> - <%= r.first %> - <%= r.last %><input type="checkbox" id="<%= r.id %>"</li>
+        <li><%= r.id %> - <%= r.first %> - <%= r.last %><input type="checkbox" id="options[]" value="<%= r.id %>"/></li>
     <% }); %>
 </ul>
 	<button onclick="sendReport();">Submit Report</button>
 
 </div>
+
+<div id="demon">
+</div>
+
 
 </div>
 

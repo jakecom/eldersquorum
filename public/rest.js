@@ -40,5 +40,12 @@ function getServerTime() {
 }
 
 function sendReport() {
-	;
+
+	var checked = []
+	$("input[name='options[]']:checked").each(function ()
+	{
+    	checked.push(parseInt($(this).val()));
+	});
+	document.getElementById("demon").innerHTML = cars;
+
 }
