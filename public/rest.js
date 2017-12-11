@@ -46,6 +46,6 @@ function sendReport() {
 	{
     	checked.push(parseInt($(this).val()));
 	});
-	document.getElementById("demon").innerHTML = cars;
+	document.getElementById("demon").innerHTML = checked;
 
 }
