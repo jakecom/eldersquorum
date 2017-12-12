@@ -46,6 +46,9 @@ function sendReport() {
 	{
     	checked.push($(this).val());
 	});
-	document.getElementById("demon").innerHTML = "Home Taught:  " + checked;
+
+	document.getElementById("tet").innerHTML = "Home Taught";
+
+	document.getElementById("demon").innerHTML = checked.join(", ");
 
 }
