@@ -41,7 +41,7 @@ function getServerTime() {
 
 function sendReport() {
 
-	var checked = $("options").length();
+	var checked = $("options[]").length();
 	//$("input[name='options[]']:checked").each(function ()
 	//{
     //	checked.push(parseInt($(this).val()));
