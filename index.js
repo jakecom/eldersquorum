@@ -184,7 +184,7 @@ if (request.session.user){
   });
 
 } else {
-	response.redirect('/log');
+	response.redirect('/test.html');
 }
 });
 
