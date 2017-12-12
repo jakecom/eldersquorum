@@ -1,3 +1,29 @@
+function sendReport() {
+
+	var checked = [];
+	$("input[name='options[]']:checked").each(function ()
+	{
+    	checked.push($(this).val());
+	});
+
+	document.getElementById("tet").innerHTML = "Home Taught";
+
+	document.getElementById("demon").innerHTML = checked.join(", ");
+
+}
+
+
+
+function logout() {
+	$.post("/logout", function(result) {
+		if (result && result.success) {
+			$("#status").text("Successfully logged out.");
+		} else {
+			$("#status").text("Error logging out.");
+		}
+	});
+}
+
 function login() {
 	var username = $("#username").val();
 	var password = $("#password").val();
@@ -17,16 +43,6 @@ function login() {
 	});
 }
 
-function logout() {
-	$.post("/logout", function(result) {
-		if (result && result.success) {
-			$("#status").text("Successfully logged out.");
-		} else {
-			$("#status").text("Error logging out.");
-		}
-	});
-}
-
 function getServerTime() {
 	$.get("/getServerTime", function(result) {
 		if (result && result.success) {
@@ -39,16 +55,3 @@ function getServerTime() {
 	});
 }
 
-function sendReport() {
-
-	var checked = [];
-	$("input[name='options[]']:checked").each(function ()
-	{
-    	checked.push($(this).val());
-	});
-
-	document.getElementById("tet").innerHTML = "Home Taught";
-
-	document.getElementById("demon").innerHTML = checked.join(", ");
-
-}
