@@ -32,7 +32,7 @@ function getServerTime() {
 		if (result && result.success) {
 			$("#status").text("Server time: " + result.time);
 		} else {
-			$("#status").text("Got a result back, but it wasn't a success. Your reponse should have had a 401 status code.");
+			$("#status").text("Got a result back, but it wasn't a success. Should have been a 401 status code.");
 		}
 	}).fail(function(result) {
 		$("#status").text("Could not get server time.");
