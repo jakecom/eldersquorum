@@ -169,6 +169,9 @@ app.get('/db', function (request, response) {
 });
 
 app.get('/report', function (request, response) {
+
+if (request.session.user){
+
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     client.query('SELECT id, first, last FROM person ORDER BY id', function(err, result) {
       done();
@@ -179,6 +182,10 @@ app.get('/report', function (request, response) {
       }  
     });
   });
+
+} else {
+	response.redirect('/log');
+}
 });
 
 // blog post
