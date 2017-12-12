@@ -27,6 +27,10 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+//app.use(express.static(__dirname + '/public'));
+// views is directory for all template files
 app.set('views', __dirname + '/views');
 app.use(logRequest);
 
@@ -34,6 +38,11 @@ app.use(logRequest);
 
 app.set('view engine', 'ejs');
 
+
+
+
+
+// fake posts to simulate a database
 const posts = [
   {
     id: 1,
@@ -62,6 +71,14 @@ const posts = [
 ]
 
 
+//app.get('/log', function(request, response) {
+//  response.render('pages/test', { posts: posts })
+//});
+
+//app.get('/rest.js', function(request, response) {
+//  response.render('pages/rest.js', { posts: posts })
+//});
+
 app.post('/login', handleLogin);
 app.post('/logout', handleLogout);
 
@@ -70,6 +87,12 @@ app.get('/getServerTime', verifyLogin, getServerTime);
 app.get('/', function(request, response) {
   response.render('pages/index', { posts: posts })
 });
+
+/* blog home page
+app.get('/', (req, res) => {
+  // render `home.ejs` with the list of posts
+  response.render('/home', { posts: posts })
+})*/
 
 app.get('/cool', function(request, response) {
   response.send(cool());
@@ -83,7 +106,15 @@ app.listen(app.get('port'), function() {
 /*************************************************************
 * Sessions/Login
 *************************************************************/
+function handleLogin(request, response) {
+	var result = {success: false};
+	if (request.body.username == "jack" && request.body.password == "jackson") {
+		request.session.user = request.body.username;
+		result = {success: true};
+	}
 
+	response.json(result);
+}
 
 function handleLogout(request, response) {
 	var result = {success: false};
@@ -116,20 +147,11 @@ function logRequest(request, response, next) {
 	next();
 }
 
-function handleLogin(request, response) {
-	var result = {success: false};
-	if (request.body.username == "jack" && request.body.password == "jackson") {
-		request.session.user = request.body.username;
-		result = {success: true};
-	}
-
-	response.json(result);
-}
 
 
 
 /***********************************************************
-* Announcements, Homepage, Database
+* Announcements, Homepage
 ************************************************************/
 var pg = require('pg');
 
@@ -145,7 +167,6 @@ app.get('/db', function (request, response) {
     });
   });
 });
-
 
 app.get('/report', function (request, response) {
 
@@ -167,13 +188,14 @@ if (request.session.user){
 }
 });
 
+// blog post
 app.get('/post/:id', (request, response) => {
-y
+  // find the post in the `posts` array
   const post = posts.filter((post) => {
     return post.id == request.params.id
   })[0]
 
-  
+  // render the `post.ejs` template with the post content
   response.render('pages/post.ejs', {
     author: post.author,
     title: post.title,
@@ -182,3 +204,11 @@ y
     body: post.body
   })
 })
+
+
+
+
+
+
+
+
