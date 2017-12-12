@@ -108,7 +108,7 @@ app.listen(app.get('port'), function() {
 *************************************************************/
 function handleLogin(request, response) {
 	var result = {success: false};
-	if (request.body.username == "admin" && request.body.password == "password") {
+	if (request.body.username == "jack" && request.body.password == "jackson") {
 		request.session.user = request.body.username;
 		result = {success: true};
 	}

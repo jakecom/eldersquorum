@@ -10,12 +10,12 @@
 <% include ../partials/nav.ejs %>
 
 <div class="container">
-<h2>Database Results</h2>
+<h2>Welcome Jack<br>Who did you home teach?</h2>
 
 <div>
 <ul>
     <% results.forEach(function(r) { %>
-        <li><%= r.id %> - <%= r.first %> - <%= r.last %><input type="checkbox" name="options[]" id="options[]" value="<%= r.id %>"/></li>
+        <li><%= r.id %> - <%= r.first %> - <%= r.last %><input type="checkbox" name="options[]" id="options[]" value="<%= r.first %> <%= r.last %>"/></li>
     <% }); %>
 </ul>
 	<button onclick="sendReport();">Submit Report</button>
@@ -23,6 +23,7 @@
 </div>
 
 <div id="demon">
+	
 </div>
 
 
